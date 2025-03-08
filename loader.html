@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dani's Fabrico - Responsive Preloader</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            height: 100%;
+        }
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        .loader {
+            text-align: center;
+            width: 90%;
+            max-width: 400px;
+        }
+        .logo {
+            width: 100%;
+            height: auto;
+            margin-bottom: 1.25rem;
+        }
+        .loading-text {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-top: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        .loading-subtext {
+            font-size: 1rem;
+            color: #34495e;
+            margin-top: 0.625rem;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: #e9ecef;
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 1.875rem auto;
+        }
+        .progress {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            animation: progress 2.5s ease-in-out infinite;
+        }
+        @keyframes progress {
+            0% { width: 0; }
+            50% { width: 100%; }
+            100% { width: 0; }
+        }
+        /* Styles for page content */
+        #content {
+            padding: 1.25rem;
+            max-width: 50rem;
+            margin: 0 auto;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+            .loading-text {
+                font-size: 1.25rem;
+            }
+            .loading-subtext {
+                font-size: 0.875rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 12px;
+            }
+            .loading-text {
+                font-size: 1rem;
+            }
+            .loading-subtext {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader">
+            <div class="logo">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 110" width="220" height="110">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3498db;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#2980b9;stop-opacity:1" />
+                        </linearGradient>
+                    </defs>
+                    <style>
+                        @keyframes drawLetter {
+                            0% { stroke-dashoffset: 1000; }
+                            100% { stroke-dashoffset: 0; }
+                        }
+                        @keyframes fillLetter {
+                            0%, 70% { fill-opacity: 0; }
+                            100% { fill-opacity: 1; }
+                        }
+                        .letter {
+                            fill: url(#grad1);
+                            fill-opacity: 0;
+                            stroke: url(#grad1);
+                            stroke-width: 2;
+                            stroke-dasharray: 1000;
+                            stroke-dashoffset: 1000;
+                        }
+                        #D {
+                            animation: drawLetter 2s ease forwards, fillLetter 2.5s ease forwards;
+                        }
+                        #F {
+                            animation: drawLetter 2s ease 0.5s forwards, fillLetter 2.5s ease 0.5s forwards;
+                        }
+                    </style>
+                    
+                    <path id="D" class="letter" d="M22,22 h44 q35,0 35,33 v0 q0,33 -35,33 h-44 v-66" />
+                    <path id="F" class="letter" d="M119,22 h70 v15 h-48 v18 h44 v15 h-44 v18" />
+                </svg>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+            <p class="loading-text">DANI'S FABRICO</p>
+            <p class="loading-subtext">Weaving innovation into every thread</p>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var preloader = document.getElementById('preloader');
+            var content = document.getElementById('content');
+
+            // Simulate a delay to show the preloader (remove this in production)
+            setTimeout(function() {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+                content.style.display = 'block';
+            }, 2000); // Adjust the delay as needed
+        });
+    </script>
+</body>
+</html>
